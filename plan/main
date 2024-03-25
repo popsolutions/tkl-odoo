@@ -1,7 +1,7 @@
 #include <turnkey/base>
 #include <turnkey/lapp>
 
-odoo-14
+odoo
 wkhtmltopdf
 python3-psycogreen
 python3-docutils
