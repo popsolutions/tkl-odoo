@@ -49,6 +49,10 @@ chown odoo:odoo /opt/odoo/custom-addons
 mkdir -p /var/log/odoo
 chown odoo:odoo /var/log/odoo
 
+# odoo.conf holds the db password & master password hash
+chown odoo:odoo /etc/odoo/odoo.conf
+chmod 0640 /etc/odoo/odoo.conf
+
 # -----------------------------------------------
 # 6. Configure Apache proxy for Odoo 18
 # -----------------------------------------------

@@ -16,7 +16,23 @@ turnkey-odoo-19.0 (1) turnkey; urgency=low
   * Added Apache WebSocket proxy support (mod_proxy_wstunnel) for Odoo 18
     live chat, discuss, and real-time notifications.
 
-  * Updated inithook for Odoo 18 compatibility (pbkdf2_sha512 hashing).
+  * Updated inithook for Odoo 18 compatibility (pbkdf2_sha512 hashing);
+    master password now stored hashed in odoo.conf.
+
+  * Inithook: support custom database name at firstboot (--dbname /
+    ODOO_DB_NAME) - initializes a fresh database via 'odoo -i base' and
+    removes the unused example database.
+
+  * Inithook: optional demo data for newly initialized databases
+    (--demo / ODOO_DEMO; default no - production safe).
+
+  * Inithook: optional download of OCA localization addons (--l10n /
+    ODOO_L10N) - clones selected l10n-* repos (18.0 branch) plus their
+    oca_dependencies into /opt/odoo/custom-addons, installs python
+    requirements and registers them in addons_path.
+
+  * Inithook: fully non-interactive when pre-seeded (TurnKey Hub
+    compatible) - unset options fall back to safe defaults.
 
   * Installed rtlcss via npm for right-to-left language support.
 

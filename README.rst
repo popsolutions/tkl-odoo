@@ -28,6 +28,33 @@ This appliance includes all the standard features in `TurnKey Core`_:
 - Custom addons directory at ``/opt/odoo/custom-addons``.
 - WebSocket support for Odoo 18 live chat and notifications.
 
+**First boot configuration**
+
+Beyond the password, first boot (``turnkey-init``) lets you:
+
+- **Choose the database name** - keep the default
+  (``TurnkeylinuxExample``) or enter a new name. A new name initializes
+  a fresh database and removes the unused example database.
+- **Choose demo data** - when a new database is initialized you can load
+  Odoo demo data (choose "No" for production).
+- **Download OCA localization addons** - e.g. ``brazil``, ``spain``.
+  Selected `OCA`_ ``l10n-*`` repos (18.0 branch) are cloned into
+  ``/opt/odoo/custom-addons``, their python requirements installed and
+  registered in ``addons_path``; the addons then show up in the Odoo
+  Apps menu, ready to install per database. Requires internet access.
+
+For unattended/pre-seeded deployments (e.g. TurnKey Hub) the same
+options can be pre-seeded via ``inithooks.conf``::
+
+    export APP_PASS=SecretPassword1!
+    export ODOO_DB_NAME=production
+    export ODOO_DEMO=no
+    export ODOO_L10N=brazil
+
+Unset options fall back to safe defaults (example database, no demo
+data, no extra addons), so existing Hub deployments keep working
+unchanged.
+
 **To create a new Odoo Database (i.e. site)**
 
 To create a new Odoo DB, the Odoo config file needs to be edited and the
@@ -47,9 +74,11 @@ Overview of process:
 
 **Notice for special Odoo Localization**
 
-In case you run a L10n Odoo Localization you will need other PIP Packages
-and Libs installed on your system, please check your localization support on
-`OCA`_.
+Localization (l10n) addons can be downloaded at first boot (see above)
+or at any time by re-running ``turnkey-init``. Some localizations may
+need additional PIP packages and system libs - ``requirements.txt`` of
+each selected OCA repo is installed automatically, but please check your
+localization's documentation on `OCA`_ for extra system dependencies.
 
 Credentials *(passwords set at first boot)*
 --------------------------------------------
